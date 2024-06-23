@@ -5,7 +5,6 @@ import subprocess
 import nibabel as nib
 import matplotlib.pyplot as plt
 import numpy as np
-import SimpleITK as sitk
 import tempfile
 import plotly.graph_objects as go
 from extraction import *
