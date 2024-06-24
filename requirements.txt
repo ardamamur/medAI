@@ -1,0 +1,10 @@
+streamlit
+Pillow
+nibabel
+matplotlib
+numpy
+SimpleITK
+plotly
+spacy
+pyyaml
+pytest-shutil

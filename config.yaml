@@ -1,0 +1,7 @@
+environment:
+  images: /app/images/
+  sources: /app/images/sources/
+  dicom_input: /app/images/input/dicom/
+  nifti_input: /app/images/input/nifti/
+  templates: /app/images/input/templates/
+  output: /app/images/output/
