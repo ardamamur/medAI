@@ -1,1 +1,1 @@
-Dice Score: 0.5
+Dice Score: 1.0
