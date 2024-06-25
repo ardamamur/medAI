@@ -11,7 +11,7 @@ WORKDIR /app
 COPY requirements.txt .
 
 # Install Python dependencies
-RUN pip3 install --no-cache-dir -r requirements.txt
+RUN pip3 install --break-system-packages --no-cache-dir -r requirements.txt
 
 # Create output directory with proper permissions
 RUN mkdir -p /app/images/output && chmod -R 755 /app/images/output
