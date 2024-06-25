@@ -47,3 +47,9 @@ selected_page = st.sidebar.selectbox("Select a service", page_names_to_funcs.key
 page_names_to_funcs[selected_page]()
 
 
+# Contact info
+st.sidebar.markdown("---")
+st.sidebar.markdown("### Let's Connect!")
+st.sidebar.markdown("[👔 LinkedIn](https://www.linkedin.com/in/ardaburakmamur/)")
+st.sidebar.markdown("[💻 GitHub](https://github.com/ardamamur)")
+st.sidebar.markdown("Made with ❤️ by Arda Mamur")
