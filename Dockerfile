@@ -14,6 +14,10 @@ COPY requirements.txt .
 RUN pip3 install --break-system-packages --no-cache-dir -r requirements.txt
 RUN python3 -m spacy download en_core_web_sm
 
+# Install SpaCy and download the English model
+RUN python3 -m pip install --no-cache-dir spacy && \
+    python3 -m spacy download en_core_web_sm
+
 # Create output directory with proper permissions
 RUN mkdir -p /app/images/output && chmod -R 755 /app/images/output
 
