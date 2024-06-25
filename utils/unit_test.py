@@ -23,8 +23,6 @@ def main():
     dice_score_file_path = '/app/utils/dice_score.txt'
 
 
-
-    # Load previous Dice score
     if os.path.exists(dice_score_file_path):
         with open(dice_score_file_path, 'r') as f:
             previous_dice_score = float(f.read().strip().split(': ')[1])
