@@ -19,7 +19,6 @@ def main():
     
     output_dir = config["environment"]["output"]
     ground_truth_mask_path = os.path.join(output_dir, 'ground_truth_mask.nii.gz')
-    #new_model_mask_path = "/home/mamur/TUM/medAI/images/output/brain_extractionBrainExtractionMask.nii.gz"
     new_model_mask_path = os.path.join(output_dir, 'brain_extractionBrainExtractionMask.nii.gz')
     dice_score_file_path = '/app/utils/dice_score.txt'
 
