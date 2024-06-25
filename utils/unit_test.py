@@ -24,12 +24,11 @@ def main():
     new_model_mask_path = os.path.join(output_dir, 'brain_extractionBrainExtractionMask.nii.gz')
     artifacts_file_path = 'utils/artifacts.txt'
     
-    # Load previous Dice score
     if os.path.exists(artifacts_file_path):
         with open(artifacts_file_path, 'r') as f:
             previous_dice_score = float(f.read().strip().split(': ')[1])
     else:
-        previous_dice_score = 0.0  # If no previous score, set to 0.0
+        previous_dice_score = 0.0
 
     new_model_mask = load_nifti(new_model_mask_path)
     ground_truth_mask = load_nifti(ground_truth_mask_path)
@@ -39,7 +38,6 @@ def main():
     with open(artifacts_file_path, 'w') as f:
         f.write(f'Dice Score: {new_dice_score}\n')
     
-    # Assert if the new Dice score is not better than the previous one
     assert new_dice_score >= previous_dice_score, (
         f"New Dice score {new_dice_score} is not better than the previous score {previous_dice_score}."
     )
