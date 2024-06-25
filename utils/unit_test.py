@@ -15,12 +15,11 @@ def calculate_dice_coefficient(mask1, mask2):
 
 def main():
     # Adjust the path to the configuration file based on the environment
-    config_path = '/app/config.yaml' if os.path.exists('/app/config.yaml') else 'config.yaml'
-    
+    config_path = "config.yaml"
     with open(config_path, 'r') as f:
         config = yaml.safe_load(f)
     
-    output_dir = config["environment"]["output"]
+    output_dir = config["pipeline_environment"]["output"]
     ground_truth_mask_path = os.path.join(output_dir, 'ground_truth_mask.nii.gz')
     new_model_mask_path = os.path.join(output_dir, 'brain_extractionBrainExtractionMask.nii.gz')
     artifacts_file_path = 'utils/artifacts.txt'

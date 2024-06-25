@@ -5,3 +5,11 @@ environment:
   nifti_input: /app/images/input/nifti/
   templates: /app/images/input/templates/
   output: /app/images/output/
+
+pipeline_environment:
+  images: images/
+  sources: images/sources/
+  dicom_input: images/input/dicom/
+  nifti_input: images/input/nifti/
+  templates: images/input/templates/
+  output: images/output/
