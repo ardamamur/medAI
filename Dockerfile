@@ -2,7 +2,7 @@
 FROM antsx/ants:latest
 
 # Install Python and pip
-RUN apt-get update && apt-get install -y python3 python3-venv
+RUN apt-get update && apt-get install -y python3 python3-pip
 
 # Set the working directory in the container
 WORKDIR /app
@@ -10,25 +10,17 @@ WORKDIR /app
 # Copy the requirements.txt file into the container
 COPY requirements.txt .
 
-# Create a virtual environment and install dependencies
-RUN python3 -m venv venv && \
-    . /app/venv/bin/activate && \
-    pip install --no-cache-dir -r requirements.txt && \
-    python -m spacy download en_core_web_sm
+# Install Python dependencies
+RUN pip3 install --no-cache-dir -r requirements.txt
 
-# Set execute permissions for the antsBrainExtraction.sh script
 # Create output directory with proper permissions
-RUN mkdir -p /app/images/output && chmod +x /app/images/output
+RUN mkdir -p /app/images/output && chmod -R 755 /app/images/output
 
 # Copy the rest of your application code into the container
 COPY . .
 
 # Set execute permissions for the antsBrainExtraction.sh script
 RUN chmod +x /app/utils/antsBrainExtraction.sh
-
-# Activate the virtual environment and set it as the default for all future commands
-ENV VIRTUAL_ENV=/app/venv
-ENV PATH="$VIRTUAL_ENV/bin:$PATH"
 
 # Expose the port Streamlit runs on
 EXPOSE 8501
