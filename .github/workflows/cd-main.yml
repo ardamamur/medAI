@@ -1,12 +1,15 @@
-name: Update and Deploy
+name: Update and Push Docker Image
 
 on:
   push:
     branches:
       - main
 
+permissions:
+  contents: write
+
 jobs:
-  build-and-deploy:
+  build-and-push:
     runs-on: ubuntu-latest
 
     steps:
@@ -54,16 +57,3 @@ jobs:
         context: .
         push: true
         tags: ardamamurtum/medai-app:latest
-
-    - name: Set up kubectl
-      uses: azure/setup-kubectl@v1
-      with:
-        version: 'latest'
-
-    - name: Configure kubectl
-      run: |
-        echo "${{ secrets.KUBECONFIG }}" | base64 --decode > $HOME/.kube/config
-
-    - name: Deploy to Kubernetes
-      run: |
-        kubectl set image deployment/medai-app medai-app=ardamamurtum/medai-app:latest
