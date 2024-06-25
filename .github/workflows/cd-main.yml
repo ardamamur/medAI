@@ -4,6 +4,10 @@ on:
   push:
     branches:
       - main
+    paths-ignore:
+      - 'utils/artifacts.txt'
+
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -32,13 +36,17 @@ jobs:
         source venv/bin/activate
         python utils/unit_test.py
 
-    - name: Commit and push updated artifacts.txt
+    - name: Check for changes and commit if any
       run: |
         git config --global user.name 'github-actions'
         git config --global user.email 'github-actions@github.com'
-        git add utils/artifacts.txt --force
-        git commit -m 'Update Dice score artifact'
-        git push
+        git add utils/artifacts.txt
+        if ! git diff-index --quiet HEAD; then
+          git commit -m 'Update Dice score artifact'
+          git push
+        else
+          echo "No changes to commit"
+        fi
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
