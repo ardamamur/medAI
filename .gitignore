@@ -2,4 +2,4 @@
 __pycache__/
 images/input/dicom/
 images/input/templates
-images/output/
+images/output/temp/

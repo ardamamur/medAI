@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: medai-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: medai-app
+  template:
+    metadata:
+      labels:
+        app: medai-app
+    spec:
+      containers:
+      - name: medai-app
+        image: ardamamurtum/medai-app:latest
+        ports:
+        - containerPort: 8501
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: medai-app-service
+spec:
+  type: NodePort
+  ports:
+  - port: 8501
+    targetPort: 8501
+    nodePort: 30001
+  selector:
+    app: medai-app
