@@ -6,5 +6,6 @@ numpy
 SimpleITK
 plotly
 spacy
+scipy
 pyyaml
 pytest-shutil
