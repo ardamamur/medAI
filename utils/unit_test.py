@@ -14,21 +14,20 @@ def calculate_dice_coefficient(mask1, mask2):
     return 1 - dice(mask1.flatten(), mask2.flatten())
 
 def main():
-    with open('/app/config.yaml', 'r') as f:
+    # Adjust the path to the configuration file based on the environment
+    config_path = '/app/config.yaml' if os.path.exists('/app/config.yaml') else 'config.yaml'
+    
+    with open(config_path, 'r') as f:
         config = yaml.safe_load(f)
     
     output_dir = config["environment"]["output"]
     ground_truth_mask_path = os.path.join(output_dir, 'ground_truth_mask.nii.gz')
-    #ground_truth_mask_path = "/home/mamur/TUM/medAI/images/output/ground_truth_mask.nii.gz"
-    #new_model_mask_path = "/home/mamur/TUM/medAI/images/output/brain_extractionBrainExtractionMask.nii.gz"
     new_model_mask_path = os.path.join(output_dir, 'brain_extractionBrainExtractionMask.nii.gz')
-    dice_score_file_path = '/app/utils/dice_score.txt'
-
-
-
+    artifacts_file_path = 'utils/artifacts.txt'
+    
     # Load previous Dice score
-    if os.path.exists(dice_score_file_path):
-        with open(dice_score_file_path, 'r') as f:
+    if os.path.exists(artifacts_file_path):
+        with open(artifacts_file_path, 'r') as f:
             previous_dice_score = float(f.read().strip().split(': ')[1])
     else:
         previous_dice_score = 0.0  # If no previous score, set to 0.0
@@ -38,7 +37,7 @@ def main():
     
     new_dice_score = calculate_dice_coefficient(new_model_mask, ground_truth_mask)
     
-    with open(dice_score_file_path, 'w') as f:
+    with open(artifacts_file_path, 'w') as f:
         f.write(f'Dice Score: {new_dice_score}\n')
     
     # Assert if the new Dice score is not better than the previous one
