@@ -13,7 +13,7 @@ import os
 import shutil
 
 # Configure page settings
-st.set_page_config(page_title="Brain Volume Estimation", page_icon=":brain:", layout="wide")
+st.set_page_config(page_title="medAI", page_icon=":brain:", layout="wide")
 
 
 # Load custom CSS
