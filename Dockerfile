@@ -1,6 +1,10 @@
 # Use the official ANTs image from Docker Hub as the base image
 FROM antsx/ants:latest
 
+# Set environment variables to avoid some potential installation issues
+ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
+
+
 # Install Python and pip
 RUN apt-get update && apt-get install -y python3 python3-pip
 
@@ -14,12 +18,9 @@ WORKDIR /app
 # Copy the requirements.txt file into the container
 COPY requirements.txt .
 
-# Install Python dependencies
-RUN pip3 install --break-system-packages --no-cache-dir -r requirements.txt
-
-# Install SpaCy and download the English model
-RUN python3 -m pip install --no-cache-dir spacy && \
-    python3 -m spacy download en_core_web_sm
+# Install spaCy and the language model
+RUN pip3 install --break-system-packages --no-cache-dir -r requirements.txt \
+    && python3 -m spacy download en_core_web_sm
 
 # Create output directory with proper permissions
 RUN mkdir -p /app/images/output && chmod -R 755 /app/images/output
