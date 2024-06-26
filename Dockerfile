@@ -7,7 +7,7 @@ RUN apt-get update && apt-get install -y python3 python3-pip
 # Install system dependencies
 RUN apt-get update && \
     apt-get install -y gcc
-    
+
 # Set the working directory in the container
 WORKDIR /app
 
@@ -16,7 +16,6 @@ COPY requirements.txt .
 
 # Install Python dependencies
 RUN pip3 install --break-system-packages --no-cache-dir -r requirements.txt
-RUN python3 -m spacy download en_core_web_sm
 
 # Install SpaCy and download the English model
 RUN python3 -m pip install --no-cache-dir spacy && \
