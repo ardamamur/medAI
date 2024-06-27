@@ -6,6 +6,8 @@ on:
       - main
     paths-ignore:
       - 'utils/artifacts.txt'
+      - "images/**"
+      - "README.md"
 
   workflow_dispatch:
 
