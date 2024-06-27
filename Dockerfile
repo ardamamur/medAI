@@ -14,11 +14,10 @@ WORKDIR /app
 # Copy the requirements.txt file into the container
 COPY requirements.txt .
 
+RUN pip3 install --break-system-packages --no-cache-dir pybind11
+
 # Install dependencies using pip
 RUN pip3 install --break-system-packages --no-cache-dir -r requirements.txt
-
-# Install nmslib separately to handle potential build issues
-RUN pip3 install --break-system-packages --no-cache-dir nmslib
 
 # Create output directory with proper permissions
 RUN mkdir -p /app/images/output && chmod -R 755 /app/images/output
