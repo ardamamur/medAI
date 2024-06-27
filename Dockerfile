@@ -4,13 +4,9 @@ FROM antsx/ants:latest
 # Set environment variables to avoid some potential installation issues
 ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
 
-
-# Install Python and pip
-RUN apt-get update && apt-get install -y python3 python3-pip
-
-# Install system dependencies
+# Install Python 3.10 and pip along with system dependencies
 RUN apt-get update && \
-    apt-get install -y gcc
+    apt-get install -y python3 python3-pip python3-dev build-essential gcc cmake
 
 # Set the working directory in the container
 WORKDIR /app
@@ -18,9 +14,11 @@ WORKDIR /app
 # Copy the requirements.txt file into the container
 COPY requirements.txt .
 
-# Install spaCy and the language model
-RUN pip3 install --break-system-packages --no-cache-dir -r requirements.txt \
-    && python3 -m spacy download en_core_web_sm
+# Install dependencies using pip
+RUN pip3 install --break-system-packages --no-cache-dir -r requirements.txt
+
+# Install nmslib separately to handle potential build issues
+RUN pip3 install --break-system-packages --no-cache-dir nmslib
 
 # Create output directory with proper permissions
 RUN mkdir -p /app/images/output && chmod -R 755 /app/images/output
