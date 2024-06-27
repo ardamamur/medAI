@@ -6,6 +6,9 @@ ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
 
 # Install Python 3.10 and pip along with system dependencies
 RUN apt-get update && \
+    apt-get install -y software-properties-common && \
+    add-apt-repository ppa:deadsnakes/ppa && \
+    apt-get update && \
     apt-get install -y python3.10 python3.10-dev python3.10-distutils build-essential gcc cmake curl && \
     curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py && \
     python3.10 get-pip.py
