@@ -9,7 +9,7 @@ class FindingsExtractor:
         self.st.markdown("Input a radiology report to extract medical entities in a structured form.", unsafe_allow_html=True)
         self.report_text = self.st.text_area("Radiology Report", height=300)
         self.extract_button = self.st.button("Extract Findings")
-        self.nlp = en_ner_bionlp13cg_md.load(),
+        self.nlp = en_ner_bionlp13cg_md.load()
 
 
     def extract_entities(self, report):
