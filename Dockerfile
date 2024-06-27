@@ -8,7 +8,7 @@ ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
 RUN apt-get update && \
     apt-get install -y python3 python3-pip python3-dev build-essential gcc cmake
 
-# Set the working directory in the container
+# Set the working directory in the containe
 WORKDIR /app
 
 # Copy the requirements.txt file into the container
